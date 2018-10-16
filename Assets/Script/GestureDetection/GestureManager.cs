@@ -5,9 +5,11 @@ using UnityEngine;
 public class GestureManager : MonoBehaviour {
 
     List<Gesture> modelGesture;
-  
+    public GameObject Hand;
 	// Use this for initialization
 	void Start () {
+        Gesture balayageDroite = new Gesture();
+        balayageDroite.AddMotionToGameObject(Hand, 0.1f, new Vector3(1, 0),0.1f);
 		
 	}
 	
