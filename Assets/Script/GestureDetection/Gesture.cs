@@ -20,17 +20,12 @@ public class Gesture : MonoBehaviour {
     {
         foreach(GameObject point in concernedPoints)
         {
-            if(position[point].Count==0)
-            {
-                position[point].Add(point.transform.position);
-            }
-            else
-            {
-                if(motions[point][currentMotion].NewBelongs(point.transform.position,position[point][position[point].Count]))//si il appartient bien on l'ajoute
-                {
+           
+               // if(motions[point][currentMotion].NewBelongs(point.transform.position,position[point][position[point].Count]))//si il appartient bien on l'ajoute
+                //{
                     position[point].Add(point.transform.position);
-                }
-                else if((position[point][position[point].Count]-position[point][0]).magnitude>motions[point][currentMotion].distanceMin)//Si la distance est supérieure a la distance min du motion on passe au suivant
+               
+                if((position[point][position[point].Count]-position[point][0]).magnitude>motions[point][currentMotion].distanceMin)//Si la distance est supérieure a la distance min du motion on passe au suivant
                 {
                     
                     if (currentMotion< motions[point].Count && motions[point][currentMotion+1].NewBelongs(point.transform.position, position[point][position[point].Count]) )//si y en a encore après et qu'on va dans ce sens ou qu'on ne bouge plus trop
@@ -40,21 +35,17 @@ public class Gesture : MonoBehaviour {
 
                     else if(currentMotion == motions[point].Count) // Si c'était le dernier
                     {
-                        Debug.Log("Collision détectée!");
+                        Debug.Log("MOUVEMENT détectée!");
                     }
                     else//Sinon le mec fait n'imp; On purge toutes les positions et on revient au premier motion
                     {
                         position[point].Clear();
 
                     }
-                    position[point].Add(point.transform.position);
-                }
-                else //On purge le buffer et on laisse le dernier
-                {
-
-                }
+                  }
+                
             }
-        }
+        
     }
 	// Update is called once per frame
 	void Update () {
