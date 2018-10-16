@@ -5,7 +5,7 @@ using UnityEngine;
 public class GestureManager : MonoBehaviour {
 
     List<Gesture> modelGesture;
-    float threshHold;
+  
 	// Use this for initialization
 	void Start () {
 		

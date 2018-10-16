@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gesture : MonoBehaviour {
+public class Gesture  {
     public List<GameObject> concernedPoints;
     Dictionary<GameObject,List<Motion>> motions;
     Dictionary<GameObject, List<Vector3>> position;
-    public float threshHold;
     int currentMotion = 0;
     // Use this for initialization
-	void Start () {
+	public Gesture()
+    {
         foreach (GameObject point in concernedPoints)
         {
             position[point] = new List<Vector3>();
         }
+
+    }
+    public void AddMotionToGameObject(GameObject obj,float speedMin, Vector3 direction, float distanceMin)
+    {
+        motions[obj].Add(new Motion(speedMin, direction, distanceMin));
+
 
     }
     public void ActualiseValues()
@@ -47,8 +53,4 @@ public class Gesture : MonoBehaviour {
             }
         
     }
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
