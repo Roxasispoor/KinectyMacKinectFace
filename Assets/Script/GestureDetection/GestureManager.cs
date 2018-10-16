@@ -6,11 +6,18 @@ public class GestureManager : MonoBehaviour {
 
     List<Gesture> modelGesture;
     public GameObject Hand;
+    public float threshold;
+    public float speedMin;
+    public float distanceMin;
+    public Vector3 marginOfError;
 	// Use this for initialization
-	void Start () {
-        Gesture balayageDroite = new Gesture();
-        balayageDroite.AddMotionToGameObject(Hand, 0.1f, new Vector3(1, 0),0.1f);
-		
+	void Start () {;
+        List<GameObject>concernedPoints = new List<GameObject>();
+        modelGesture = new List<Gesture>();
+        concernedPoints.Add(Hand);
+        Gesture balayageDroite = new Gesture(concernedPoints);
+        balayageDroite.AddMotionToGameObject(Hand, speedMin, new Vector3(1, 0), distanceMin, threshold,marginOfError);
+        modelGesture.Add(balayageDroite);
 	}
 	
 	// Update is called once per frame

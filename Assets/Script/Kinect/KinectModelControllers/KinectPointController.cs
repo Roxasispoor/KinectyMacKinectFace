@@ -103,7 +103,7 @@ public class KinectPointController : MonoBehaviour {
         if (sw.pollSkeleton())
 		{
         //    trace.isTracked = true;
-            Debug.Log("After pollSkeleton() ");
+          //  Debug.Log("After pollSkeleton() ");
 			for( int ii = 0; ii < (int)Kinect.NuiSkeletonPositionIndex.Count; ii++) {
 				//_bonePos[ii] = sw.getBonePos(ii);
 				if( ((uint)Mask & (uint)(1 << ii) ) > 0 ){
@@ -112,7 +112,7 @@ public class KinectPointController : MonoBehaviour {
                             sw.bonePos[player, ii].x * scale,
                             sw.bonePos[player, ii].y * scale,
                             sw.bonePos[player, ii].z * scale);
-                    Debug.Log(sw.bonePos[player, ii].x * scale);
+                    //Debug.Log(sw.bonePos[player, ii].x * scale);
                     
 				}
 			}
