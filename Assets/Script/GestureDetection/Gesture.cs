@@ -53,7 +53,7 @@ public class Gesture  {
                     if (goam.currentMotion == goam.motions.Count - 1 && 
                         (goam.Positions[goam.Positions.Count - 1] - goam.Positions[0]).magnitude > goam.motions[goam.currentMotion].distanceMin) // Si c'était le dernier
                     {
-                        Debug.Log(name+ " détecté");
+                        Debug.Log(name+" détecté");
                         goam.Positions.Clear();
                         goam.currentMotion = 0;
                     }

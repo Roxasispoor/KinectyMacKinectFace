@@ -399,12 +399,28 @@ MonoBehaviour:
         speedMin: 0.001
         direction: {x: 1, y: 0, z: 0}
         distanceMin: 0.2
-        marginOfError: {x: 0, y: 0.2, z: 0.2}
+        marginOfError: {x: 0, y: 0.3, z: 0.1}
       - threshold: 0.05
         speedMin: 0.001
         direction: {x: -1, y: 0, z: 0}
         distanceMin: 0.2
-        marginOfError: {x: 0, y: 0.2, z: 0.2}
+        marginOfError: {x: 0, y: 0.3, z: 0.1}
+      positions: []
+      currentMotion: 0
+  - name: Astroboy
+    motions:
+    - point: {fileID: 1150125911}
+      motions:
+      - threshold: 0.09
+        speedMin: 0.001
+        direction: {x: 0, y: 0, z: 1}
+        distanceMin: 0.2
+        marginOfError: {x: 0.2, y: 0.2, z: 0}
+      - threshold: 0.09
+        speedMin: 0.001
+        direction: {x: 0, y: 0, z: -1}
+        distanceMin: 0.2
+        marginOfError: {x: 0.1, y: 0.2, z: 0}
       positions: []
       currentMotion: 0
   numberGesture: 0
