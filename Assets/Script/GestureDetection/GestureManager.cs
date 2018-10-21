@@ -6,10 +6,7 @@ public class GestureManager : MonoBehaviour {
 
     public List<Gesture> modelGesture;
 
-    public int numberGesture;
-    public int positionCount;
-    public int currentMotion = 0;
-
+ 
     // Use this for initialization
     void Start () {
         

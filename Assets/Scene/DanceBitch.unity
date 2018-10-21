@@ -406,7 +406,10 @@ MonoBehaviour:
         distanceMin: 0.2
         marginOfError: {x: 0, y: 0.3, z: 0.1}
       positions: []
+      alreadyDetected: 0
       currentMotion: 0
+      timeBuffer: 0.1
+      timeDetected: 0
   - name: Astroboy
     motions:
     - point: {fileID: 1150125911}
@@ -422,10 +425,125 @@ MonoBehaviour:
         distanceMin: 0.2
         marginOfError: {x: 0.1, y: 0.2, z: 0}
       positions: []
+      alreadyDetected: 0
       currentMotion: 0
-  numberGesture: 0
-  positionCount: 0
-  currentMotion: 0
+      timeBuffer: 0.1
+      timeDetected: 0
+  - name: Balayage Gauche
+    motions:
+    - point: {fileID: 1150125911}
+      motions:
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: -1, y: 0, z: 0}
+        distanceMin: 0.2
+        marginOfError: {x: 0, y: 0.3, z: 0.1}
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 1, y: 0, z: 0}
+        distanceMin: 0.2
+        marginOfError: {x: 0, y: 0.3, z: 0.1}
+      positions: []
+      alreadyDetected: 0
+      currentMotion: 0
+      timeBuffer: 0.1
+      timeDetected: 0
+  - name: Praise the SUN
+    motions:
+    - point: {fileID: 1150125911}
+      motions:
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: 1, z: 0}
+        distanceMin: 0.18
+        marginOfError: {x: 0.2, y: 0, z: 0.2}
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: -1, z: 0}
+        distanceMin: 0.18
+        marginOfError: {x: 0.2, y: 0, z: 0.2}
+      positions: []
+      alreadyDetected: 0
+      currentMotion: 0
+      timeBuffer: 0.3
+      timeDetected: 0
+    - point: {fileID: 1944184922}
+      motions:
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: 1, z: 0}
+        distanceMin: 0.22
+        marginOfError: {x: 0.05, y: 0, z: 0.2}
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: -1, z: 0}
+        distanceMin: 0.22
+        marginOfError: {x: 0.05, y: 0, z: 0.2}
+      positions: []
+      alreadyDetected: 0
+      currentMotion: 0
+      timeBuffer: 0.3
+      timeDetected: 0
+  - name: Runny Run
+    motions:
+    - point: {fileID: 905101554}
+      motions:
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: 0, z: 1}
+        distanceMin: 0.15
+        marginOfError: {x: 0.1, y: 0.1, z: 0}
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: 0, z: -1}
+        distanceMin: 0.18
+        marginOfError: {x: 0.1, y: 0.1, z: 0}
+      positions: []
+      alreadyDetected: 0
+      currentMotion: 0
+      timeBuffer: 0.3
+      timeDetected: 0
+    - point: {fileID: 1656376723}
+      motions:
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: 0, z: -1}
+        distanceMin: 0.15
+        marginOfError: {x: 0.1, y: 0.1, z: 0}
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 0, y: 0, z: 1}
+        distanceMin: 0.18
+        marginOfError: {x: 0.1, y: 0.1, z: 0}
+      positions: []
+      alreadyDetected: 0
+      currentMotion: 0
+      timeBuffer: 0.3
+      timeDetected: 0
+  - name: Show me your moves
+    motions:
+    - point: {fileID: 1944184922}
+      motions:
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: -1, y: 0, z: 0}
+        distanceMin: 0.2
+        marginOfError: {x: 0, y: 0.1, z: 1}
+      - threshold: 0.08
+        speedMin: 0.001
+        direction: {x: 1, y: 1, z: 0}
+        distanceMin: 0.1
+        marginOfError: {x: 0, y: 0, z: 0.5}
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: -1, y: 0, z: 0}
+        distanceMin: 0.18
+        marginOfError: {x: 0, y: 0.2, z: 0.5}
+      positions: []
+      alreadyDetected: 0
+      currentMotion: 0
+      timeBuffer: 0
+      timeDetected: 0
 --- !u!1 &427399249
 GameObject:
   m_ObjectHideFlags: 0
