@@ -2,66 +2,84 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Gesture  {
-    public List<GameObject> concernedPoints;
-    Dictionary<GameObject,List<Motion>> motions;
-    Dictionary<GameObject, List<Vector3>> position;
-    int currentMotion = 0;
+    public string name;
+    public List<GameObjectAndMotions> motions;
+    
     // Use this for initialization
-	public Gesture(List<GameObject> concernedPoints)
+    public Gesture(List<GameObject> concernedPoints,string name)
     {
-        motions = new Dictionary<GameObject, List<Motion>>();
-        position = new Dictionary<GameObject, List<Vector3>>();
-        this.concernedPoints = concernedPoints;
+        this.name = name;
+        motions = new List<GameObjectAndMotions>();
         foreach (GameObject point in concernedPoints)
         {
-            position.Add(point, new List<Vector3>());
-            motions.Add(point, new List<Motion>()); 
+            motions.Add(new GameObjectAndMotions( point, new List<Motion>())); 
         }
 
     }
     public void AddMotionToGameObject(GameObject obj,float speedMin, Vector3 direction, float distanceMin, float threshold, Vector3 marginOfError)
     {
-        motions[obj].Add(new Motion(speedMin, direction, distanceMin, threshold,marginOfError));
+
+        FindInMotions(obj).Add(new Motion(speedMin, direction, distanceMin, threshold,marginOfError));
+    }
+
+
+    public List<Motion> FindInMotions(GameObject point)
+    {
+        foreach(GameObjectAndMotions goam in motions)
+        {
+            if(goam.point==point)
+            {
+                return goam.motions;
+            }
+        }
+        Debug.Log("GameObject not found in Gesture.Find()!");
+        return null;
     }
     public void ActualiseValues()
     {
-        foreach(GameObject point in concernedPoints)
+        foreach(GameObjectAndMotions goam in motions)
         {
 
             // if(motions[point][currentMotion].NewBelongs(point.transform.position,position[point][position[point].Count]))//si il appartient bien on l'ajoute
             //{
-            position[point].Add(point.transform.position);
-            if (position[point].Count > 1)
+            goam.Positions.Add(goam.point.transform.position);
+            if (goam.Positions.Count > 1)
             {
-                if (motions[point][currentMotion].NewBelongs(point.transform.position, position[point][position[point].Count - 2],position[point][0])) //Si la distance est supérieure a la distance min du motion on passe au suivant
+                if (goam.motions[goam.currentMotion].NewBelongs(goam.point.transform.position, goam.Positions[goam.Positions.Count - 2],
+                    goam.Positions[0], goam.currentMotion)) //Si la distance est supérieure a la distance min du motion on passe au suivant
                 {
-                    if (currentMotion == motions[point].Count - 1 && (position[point][position[point].Count - 1] - position[point][0]).magnitude > motions[point][currentMotion].distanceMin) // Si c'était le dernier
+                    if (goam.currentMotion == goam.motions.Count - 1 && 
+                        (goam.Positions[goam.Positions.Count - 1] - goam.Positions[0]).magnitude > goam.motions[goam.currentMotion].distanceMin) // Si c'était le dernier
                     {
-                        Debug.Log("MOUVEMENT détectée!");
-                        position[point].Clear();
-                        currentMotion = 0;
+                        Debug.Log(name+ " détecté");
+                        goam.Positions.Clear();
+                        goam.currentMotion = 0;
                     }
                 }
                 else
                 {
-                    if (currentMotion < motions[point].Count-1 && (motions[point][currentMotion + 1].NewBelongs(point.transform.position, position[point][position[point].Count - 1], position[point][0])) &&
-                            (position[point][position[point].Count - 2] - position[point][0]).magnitude > motions[point][currentMotion].distanceMin) // on est dans le mouvement d'après et on avait fais assez
+                    if (goam.currentMotion < goam.motions.Count-1 && (goam.motions[goam.currentMotion + 1].NewBelongs(goam.point.transform.position,
+                        goam.Positions[goam.Positions.Count - 1], goam.Positions[0], goam.currentMotion)) &&
+                            (goam.Positions[goam.Positions.Count - 2] - goam.Positions[0]).magnitude > goam.motions[goam.currentMotion].distanceMin) // on est dans le mouvement d'après et on avait fais assez
                     {
-                        currentMotion++;
-                        position[point].Clear();
-                        position[point].Add(point.transform.position);
+                        goam.currentMotion++;
+                        goam.Positions.Clear();
+                        goam.Positions.Add(goam.point.transform.position);
                     }
                     else
                     {
-                        position[point].Clear();
-                        Debug.Log("connard, suis le mouvement!");
-                        currentMotion = 0;
+                        goam.Positions.Clear();
+                     //   Debug.Log("connard, suis le mouvement!");
+                        goam.currentMotion = 0;
                     }
                 }
+                //positionCount = position[point].Count;
             }
                 
         }
         
-    }
+
+}
 }

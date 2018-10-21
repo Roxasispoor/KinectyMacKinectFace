@@ -303,6 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 380440994}
   - component: {fileID: 380440993}
+  - component: {fileID: 380440995}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -378,6 +379,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &380440995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 380440992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19136f3d020789643be9c8c15d485c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelGesture:
+  - name: Balayage Droite
+    motions:
+    - point: {fileID: 1150125911}
+      motions:
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: 1, y: 0, z: 0}
+        distanceMin: 0.2
+        marginOfError: {x: 0, y: 0.2, z: 0.2}
+      - threshold: 0.05
+        speedMin: 0.001
+        direction: {x: -1, y: 0, z: 0}
+        distanceMin: 0.2
+        marginOfError: {x: 0, y: 0.2, z: 0.2}
+      positions: []
+      currentMotion: 0
+  numberGesture: 0
+  positionCount: 0
+  currentMotion: 0
 --- !u!1 &427399249
 GameObject:
   m_ObjectHideFlags: 0
