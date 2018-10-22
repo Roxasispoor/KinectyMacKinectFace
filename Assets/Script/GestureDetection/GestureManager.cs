@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GestureManager : MonoBehaviour {
 
+    public GameObject bodyTrigger;
     public List<Gesture> modelGesture;
 
  
@@ -39,6 +42,20 @@ public class GestureManager : MonoBehaviour {
 	void Update () {
 		foreach(Gesture gesture in modelGesture)
         {
+            if (GetComponent<KinectPointController>().Hand_Right.transform.position != new Vector3(0, 0, 0)
+                && GetComponent<KinectPointController>().Elbow_Left.transform.position != new Vector3(0, 0, 0)
+                && GetComponent<KinectPointController>().Hand_Left.transform.position != new Vector3(0, 0, 0))
+            {
+                if (bodyTrigger != null)
+                {
+                    bodyTrigger.GetComponent<Image>().color = Color.green;
+                }
+            }
+            else
+            {
+                bodyTrigger.GetComponent<Image>().color = Color.red;
+            }
+            
             gesture.ActualiseValues(); //ON rajoute les dernières values dans le buffer
                                        //On regarde si ça correspond au motion en cours. Si oui on le continue, sinon on ne laisse que cette value dedans.
            // positionCount = gesture.positionCount;

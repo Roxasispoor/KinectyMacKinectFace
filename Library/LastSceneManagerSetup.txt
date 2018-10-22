@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/DanceBitch.unity
+- path: Assets/Scene/DanceWaterDance.unity
   isLoaded: 1
   isActive: 1

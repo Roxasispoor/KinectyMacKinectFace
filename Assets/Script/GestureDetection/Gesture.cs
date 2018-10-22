@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 [System.Serializable]
@@ -7,6 +9,9 @@ public class Gesture
 {
     public string name;
     public List<GameObjectAndMotions> motions;
+    public GameObject trigger;
+    private bool detected;
+    private float displayBuffer;
     //   int totalDetected = 0;
 
     // Use this for initialization
@@ -39,9 +44,13 @@ public class Gesture
         Debug.Log("GameObject not found in Gesture.Find()!");
         return null;
     }
+
     public void ActualiseValues()
     {
-
+        if (Time.fixedTime > displayBuffer)
+        {
+            trigger.GetComponent<Image>().color = Color.white;
+        }
         foreach (GameObjectAndMotions goam in motions)
         {
 
@@ -84,6 +93,7 @@ public class Gesture
                         {
                             goam.alreadyDetected = false;
                         }
+
                         goam.currentMotion = 0;
 
                     }
@@ -98,20 +108,27 @@ public class Gesture
             if (!goam.alreadyDetected)
             {
                 detectedAll = false;
-                
+                displayBuffer = Time.fixedTime + 2;
             }
 
         }
         if (detectedAll)
         {
+            if(name == "Show me your moves")
+            {
+                SceneManager.LoadScene("Main Menu");
+            }
             Debug.Log(name + " détecté");
+            if (trigger != null)
+            {
+                trigger.GetComponent<Image>().color = Color.green;                
+            }   
             foreach (GameObjectAndMotions goam in motions)
             {
                 goam.alreadyDetected = false;
-
+                                 
             }
         }
-
     }
 }
 
