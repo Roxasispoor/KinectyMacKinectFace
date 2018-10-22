@@ -664,12 +664,12 @@ MonoBehaviour:
       - threshold: 0.09
         speedMin: 0.001
         direction: {x: 0, y: 0, z: 1}
-        distanceMin: 0.2
+        distanceMin: 0.25
         marginOfError: {x: 0.2, y: 0.2, z: 0}
       - threshold: 0.09
         speedMin: 0.001
         direction: {x: 0, y: 0, z: -1}
-        distanceMin: 0.2
+        distanceMin: 0.25
         marginOfError: {x: 0.1, y: 0.2, z: 0}
       positions: []
       alreadyDetected: 0
@@ -696,7 +696,7 @@ MonoBehaviour:
       currentMotion: 0
       timeBuffer: 0.1
       timeDetected: 0
-    trigger: {fileID: 1281337939}
+    trigger: {fileID: 1763429796}
   - name: Praise the SUN
     motions:
     - point: {fileID: 1150125911}
@@ -759,12 +759,12 @@ MonoBehaviour:
         speedMin: 0.001
         direction: {x: 0, y: 0, z: -1}
         distanceMin: 0.15
-        marginOfError: {x: 0.1, y: 0.1, z: 0}
+        marginOfError: {x: 0.2, y: 0.2, z: 0}
       - threshold: 0.05
         speedMin: 0.001
         direction: {x: 0, y: 0, z: 1}
         distanceMin: 0.18
-        marginOfError: {x: 0.1, y: 0.1, z: 0}
+        marginOfError: {x: 0.2, y: 0.2, z: 0}
       positions: []
       alreadyDetected: 0
       currentMotion: 0
@@ -778,18 +778,18 @@ MonoBehaviour:
       - threshold: 0.05
         speedMin: 0.001
         direction: {x: -1, y: 0, z: 0}
-        distanceMin: 0.2
-        marginOfError: {x: 0, y: 0.1, z: 1}
+        distanceMin: 0.23
+        marginOfError: {x: 0, y: 0.3, z: 0.2}
       - threshold: 0.08
         speedMin: 0.001
         direction: {x: 1, y: 1, z: 0}
-        distanceMin: 0.1
-        marginOfError: {x: 0, y: 0, z: 0.5}
+        distanceMin: 0.26
+        marginOfError: {x: 0, y: 0, z: 0.2}
       - threshold: 0.05
         speedMin: 0.001
         direction: {x: -1, y: 0, z: 0}
         distanceMin: 0.18
-        marginOfError: {x: 0, y: 0.2, z: 0.5}
+        marginOfError: {x: 0, y: 0.2, z: 0.2}
       positions: []
       alreadyDetected: 0
       currentMotion: 0

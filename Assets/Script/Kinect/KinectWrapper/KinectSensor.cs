@@ -88,64 +88,62 @@ public class KinectSensor : MonoBehaviour, KinectInterface {
 	
 	void Awake()
 	{
-		if (KinectSensor.instance != null)
-		{
-			Debug.Log("There should be only one active instance of the KinectSensor component at at time.");
-            throw new Exception("There should be only one active instance of the KinectSensor component at a time.");
-		}
-		try
-		{
-			// The MSR Kinect DLL (native code) is going to load into the Unity process and stay resident even between debug runs of the game.  
-            // So our component must be resilient to starting up on a second run when the Kinect DLL is already loaded and
-            // perhaps even left in a running state.  Kinect does not appear to like having NuiInitialize called when it is already initialized as
-            // it messes up the internal state and stops functioning.  It is resilient to having Shutdown called right before initializing even if it
-            // hasn't been initialized yet.  So calling this first puts us in a good state on a first or second run.
-			// However, calling NuiShutdown before starting prevents the image streams from being read, so if you want to use image data
-			// (either depth or RGB), comment this line out.
-			//NuiShutdown();
-			
-			int hr = NativeMethods.NuiInitialize(NuiInitializeFlags.UsesDepthAndPlayerIndex | NuiInitializeFlags.UsesSkeleton | NuiInitializeFlags.UsesColor);
-            if (hr != 0)
-			{
-            	throw new Exception("NuiInitialize Failed.");
-			}
-			
-			hr = NativeMethods.NuiSkeletonTrackingEnable(IntPtr.Zero, skeltonTrackingMode);
-			if (hr != 0)
-			{
-				throw new Exception("Cannot initialize Skeleton Data.");
-			}
-			
-			depthStreamHandle = IntPtr.Zero;
-			hr = NativeMethods.NuiImageStreamOpen(NuiImageType.DepthAndPlayerIndex, NuiImageResolution.resolution320x240, 0, 2, IntPtr.Zero, ref depthStreamHandle);
-			//Debug.Log(depthStreamHandle);
-			if (hr != 0)
-			{
-				throw new Exception("Cannot open depth stream.");
-			}
-			
-			colorStreamHandle = IntPtr.Zero;
-			hr = NativeMethods.NuiImageStreamOpen(NuiImageType.Color, NuiImageResolution.resolution640x480, 0, 2, IntPtr.Zero, ref colorStreamHandle);
-			//Debug.Log(colorStreamHandle);
-			if (hr != 0)
-			{
-				throw new Exception("Cannot open color stream.");
-			}
-			colorImage = new Color32[640*480];
-			
-			double theta = Mathf.Atan((lookAt.y+kinectCenter.y-sensorHeight) / (lookAt.z + kinectCenter.z));
-			long kinectAngle = (long)(theta * (180 / Mathf.PI));
-			NativeMethods.NuiCameraSetAngle(kinectAngle);
-			
-			DontDestroyOnLoad(gameObject);
-			KinectSensor.Instance = this;
-			NativeMethods.NuiSetDeviceStatusCallback(new NuiStatusProc(), IntPtr.Zero);
-		}
-		
-		catch (Exception e)
-		{
-			Debug.Log(e.Message);
-		}
+        if (KinectSensor.instance == null)
+        {
+            try
+            {
+                // The MSR Kinect DLL (native code) is going to load into the Unity process and stay resident even between debug runs of the game.  
+                // So our component must be resilient to starting up on a second run when the Kinect DLL is already loaded and
+                // perhaps even left in a running state.  Kinect does not appear to like having NuiInitialize called when it is already initialized as
+                // it messes up the internal state and stops functioning.  It is resilient to having Shutdown called right before initializing even if it
+                // hasn't been initialized yet.  So calling this first puts us in a good state on a first or second run.
+                // However, calling NuiShutdown before starting prevents the image streams from being read, so if you want to use image data
+                // (either depth or RGB), comment this line out.
+                //NuiShutdown();
+
+                int hr = NativeMethods.NuiInitialize(NuiInitializeFlags.UsesDepthAndPlayerIndex | NuiInitializeFlags.UsesSkeleton | NuiInitializeFlags.UsesColor);
+                if (hr != 0)
+                {
+                    throw new Exception("NuiInitialize Failed.");
+                }
+
+                hr = NativeMethods.NuiSkeletonTrackingEnable(IntPtr.Zero, skeltonTrackingMode);
+                if (hr != 0)
+                {
+                    throw new Exception("Cannot initialize Skeleton Data.");
+                }
+
+                depthStreamHandle = IntPtr.Zero;
+                hr = NativeMethods.NuiImageStreamOpen(NuiImageType.DepthAndPlayerIndex, NuiImageResolution.resolution320x240, 0, 2, IntPtr.Zero, ref depthStreamHandle);
+                //Debug.Log(depthStreamHandle);
+                if (hr != 0)
+                {
+                    throw new Exception("Cannot open depth stream.");
+                }
+
+                colorStreamHandle = IntPtr.Zero;
+                hr = NativeMethods.NuiImageStreamOpen(NuiImageType.Color, NuiImageResolution.resolution640x480, 0, 2, IntPtr.Zero, ref colorStreamHandle);
+                //Debug.Log(colorStreamHandle);
+                if (hr != 0)
+                {
+                    throw new Exception("Cannot open color stream.");
+                }
+                colorImage = new Color32[640 * 480];
+
+                double theta = Mathf.Atan((lookAt.y + kinectCenter.y - sensorHeight) / (lookAt.z + kinectCenter.z));
+                long kinectAngle = (long)(theta * (180 / Mathf.PI));
+                NativeMethods.NuiCameraSetAngle(kinectAngle);
+
+                DontDestroyOnLoad(gameObject);
+                KinectSensor.Instance = this;
+                NativeMethods.NuiSetDeviceStatusCallback(new NuiStatusProc(), IntPtr.Zero);
+            }
+
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
+            }
+        }
 	}
 	
 	void LateUpdate()

@@ -108,7 +108,6 @@ public class Gesture
             if (!goam.alreadyDetected)
             {
                 detectedAll = false;
-                displayBuffer = Time.fixedTime + 2;
             }
 
         }
@@ -121,7 +120,8 @@ public class Gesture
             Debug.Log(name + " détecté");
             if (trigger != null)
             {
-                trigger.GetComponent<Image>().color = Color.green;                
+                trigger.GetComponent<Image>().color = Color.green;
+                displayBuffer = Time.fixedTime + 2;
             }   
             foreach (GameObjectAndMotions goam in motions)
             {
