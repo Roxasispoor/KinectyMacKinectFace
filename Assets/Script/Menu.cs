@@ -14,7 +14,10 @@ public class Menu : MonoBehaviour{
     {
         SceneManager.LoadScene("DanceWaterDance", LoadSceneMode.Single);
     }
-
+    public void GetBackToMenu()
+    {
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+    }
     public void Exit()
     {
         Application.Quit();
