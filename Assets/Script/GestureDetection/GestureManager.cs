@@ -40,6 +40,11 @@ public class GestureManager : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetButtonDown("Escape")){
+            SceneManager.LoadScene("Main Menu");
+        }
+
 		foreach(Gesture gesture in modelGesture)
         {
             if (GetComponent<KinectPointController>().Hand_Right.transform.position != new Vector3(0, 0, 0)

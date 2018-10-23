@@ -121,7 +121,7 @@ public class Gesture
             if (trigger != null)
             {
                 trigger.GetComponent<Image>().color = Color.green;
-                displayBuffer = Time.fixedTime + 2;
+                displayBuffer = Time.fixedTime + 1;
             }   
             foreach (GameObjectAndMotions goam in motions)
             {
